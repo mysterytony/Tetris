@@ -83,6 +83,7 @@ namespace Tetris.TetrisBoard
             this.map = new Map(10, 20);
             //this.board = new BlockInBoard[10, 20];
 
+            isGameOver = false;
              score = 0;
             combo = 0;
          interval = 1000;//milisecond
