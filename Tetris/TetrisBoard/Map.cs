@@ -1222,7 +1222,17 @@ namespace Tetris
         }
 
 
+        public Block.Block_Status getBlockStatus(int y, int x)
+        {
 
+            return map[y,x].blockStatus;
+
+        }
+
+        public Color getBlockColor(int y, int x)
+        {
+            return map[y,x].blockColor;
+        }
 
 
     }

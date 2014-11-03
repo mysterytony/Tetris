@@ -20,11 +20,8 @@ namespace Tetris
         /// indicate wheather the key is pressed
         /// </summary>
         public bool upKey = false,
-            downKey = false,
             leftKey = false,
-            rightKey = false,
-            spaceKey = false,
-            cKey = false;
+            rightKey = false;
 
 
 
@@ -39,12 +36,44 @@ namespace Tetris
 
         private void timKeyDetector_Tick(object sender, EventArgs e)
         {
-            upKey = Keyboard.IsKeyDown(Keys.Up);
-            downKey = Keyboard.IsKeyDown(Keys.Down);
+            
             leftKey = Keyboard.IsKeyDown(Keys.Left);
             rightKey = Keyboard.IsKeyDown(Keys.Right);
-            spaceKey = Keyboard.IsKeyDown(Keys.Space);
-            cKey = Keyboard.IsKeyDown(Keys.C);
+
+            
+
+            if (leftKey)
+                board1.keyPressed(Keys.Left);
+
+            if (rightKey)
+                board1.keyPressed(Keys.Right);
+        }
+
+        private void timTicker_Tick(object sender, EventArgs e)
+        {
+            board1.timeTick();
+        }
+
+        private void frmGamePlay_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmGamePlay_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+                return;
+
+            board1.keyPressed(e.KeyCode);
+
+        }
+
+        private void timUpKeyDector_Tick(object sender, EventArgs e)
+        {
+            //upKey = Keyboard.IsKeyDown(Keys.Up);
+
+            //if (upKey)
+            //    board1.keyPressed(Keys.Up);
         }
 
         

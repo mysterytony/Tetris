@@ -18,6 +18,8 @@ namespace Tetris.TetrisBoard
             PREVIEW,
         }
 
+        
+
         public Color blockColor;
         public Block_Status blockStatus;
 

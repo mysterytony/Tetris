@@ -55,12 +55,16 @@
       <DependentUpon>frmGamePlay.cs</DependentUpon>
     </Compile>
     <Compile Include="Keyboard.cs" />
+    <Compile Include="TetrisBoard\BlockInBoard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TetrisBoard\Board.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TetrisBoard\Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TetrisBoard\Block.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="TetrisBoard\Block.cs" />
     <EmbeddedResource Include="frmGamePlay.resx">
       <DependentUpon>frmGamePlay.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +139,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Z.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shape_Empty.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

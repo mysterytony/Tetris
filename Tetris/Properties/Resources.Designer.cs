@@ -193,6 +193,16 @@ namespace Tetris.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Shape_Empty {
+            get {
+                object obj = ResourceManager.GetObject("Shape_Empty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap T {
             get {
                 object obj = ResourceManager.GetObject("T", resourceCulture);
