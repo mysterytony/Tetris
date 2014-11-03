@@ -56,11 +56,14 @@ namespace Tetris
 
         private void frmGamePlay_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void frmGamePlay_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
+            
+
+
             if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
                 return;
 
@@ -68,12 +71,25 @@ namespace Tetris
 
         }
 
-        private void timUpKeyDector_Tick(object sender, EventArgs e)
-        {
-            //upKey = Keyboard.IsKeyDown(Keys.Up);
+        //private void timUpKeyDector_Tick(object sender, EventArgs e)
+        //{
+        //    upKey = Keyboard.IsKeyDown(Keys.Up);
 
-            //if (upKey)
-            //    board1.keyPressed(Keys.Up);
+        //    if (upKey)
+        //        board1.keyPressed(Keys.Up);
+        //}
+
+
+
+
+        private void unFocusableButton1_Click(object sender, EventArgs e)
+        {
+            board1.reinit();
+        }
+
+        private void btnFeedBack_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("mailto:lihenantony1997@gmail.com");
         }
 
         

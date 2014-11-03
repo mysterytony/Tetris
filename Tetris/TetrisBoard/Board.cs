@@ -19,6 +19,7 @@ namespace Tetris.TetrisBoard
         public bool isGameOver = false;
 
         public Label lblTime = new Label();
+        public Label lblScore = new Label();
 
         public BlockInBoard[,] board;
 
@@ -32,7 +33,7 @@ namespace Tetris.TetrisBoard
         public int score, combo = 0;
         public int interval = 1000;//milisecond
         public int timecounter = 0, runningcounter = 0;
-        public int totaltime = 30;//in second
+        public int totaltime = 120;//in second
 
         public boardMode board_mode;
 
@@ -57,22 +58,44 @@ namespace Tetris.TetrisBoard
             this.displayScore(false);
 
             picNext.Size = new Size(80,80);
-            picNext.Location = new Point(210, 50);
+            picNext.Location = new Point(210, 80);
 
             picSave.Size = new Size(80, 80);
-            picSave.Location = new Point(210, 140);
+            picSave.Location = new Point(210, 170);
 
             lblTime.Location = new Point(210, 10);
+            lblScore.Location = new Point(210, 40);
 
             this.Controls.Add(lblTime);
             this.Controls.Add(picNext);
             this.Controls.Add(picSave);
+            this.Controls.Add(lblScore);
 
             refreshMap();
-
+            displayScore(false);
+            this.displayTime();
 
         }
 
+        public void reinit()
+        {
+            
+            this.map = new Map(10, 20);
+            //this.board = new BlockInBoard[10, 20];
+
+             score = 0;
+            combo = 0;
+         interval = 1000;//milisecond
+         timecounter = 0;
+            runningcounter = 0;
+        totaltime = 120;//in second
+
+            this.nextShape = Map.Shape.NULL;
+
+            refreshMap();
+            this.displayTime();
+            this.displayScore(false);
+        }
 
         public void refersh(String msg)//BlockInBoard[,] board, int s, bool isCombo)
         {
@@ -113,19 +136,38 @@ namespace Tetris.TetrisBoard
 
         public void displayScore(bool isCombo)
         {
-
+            lblScore.Text = "score: " + score + (isCombo ? " combo: " + combo : "");
         }
 
         public void setScore(int rowCleaned)
         {
+            if (rowCleaned > 0 && combo > 0)
+            {
+                // bonus score
+                this.score += rowCleaned * combo * 2;
+                this.displayScore(true);
 
+            }
+            else if (rowCleaned > 0 && combo <= 0)
+            {
+                //normal score
+                this.score += rowCleaned;
+                this.combo += rowCleaned;
+                this.displayScore(false);
+
+            }
+            else if (rowCleaned <= 0)
+            {
+                this.combo = 0;
+                this.displayScore(false);
+            }
         }
 
         public void displayTime()
         {
             int leftTime = (totaltime * 1000 - timecounter)/1000;
 
-            lblTime.Text = leftTime / 60 + ":" + (leftTime % 60 < 10 ? "0" : "") + leftTime % 60;
+            lblTime.Text = "time: " + leftTime / 60 + ":" + (leftTime % 60 < 10 ? "0" : "") + leftTime % 60;
         }
 
         public void drawNextSaveShape()
@@ -207,34 +249,41 @@ namespace Tetris.TetrisBoard
                     e = map.createShape(nextShape, x);
                 }
 
-
+                Map.Shape firstS = Map.Shape.NULL;
                 switch (shape)
                 {
                     case 0:
                         nextShape = Map.Shape.I;
+                        firstS = Map.Shape.O;
                         break;
                     case 1:
                         nextShape = Map.Shape.J;
+                        firstS = Map.Shape.T;
                         break;
                     case 2:
                         nextShape = Map.Shape.L;
+                        firstS = Map.Shape.Z;
                         break;
                     case 3:
                         nextShape = Map.Shape.O;
+                        firstS = Map.Shape.I;
                         break;
                     case 4:
                         nextShape = Map.Shape.S;
+                        firstS = Map.Shape.J;
                         break;
                     case 5:
                         nextShape = Map.Shape.T;
+                        firstS = Map.Shape.L;
                         break;
                     case 6:
                         nextShape = Map.Shape.Z;
+                        firstS = Map.Shape.T;
                         break;
                 }
 
 
-                map.createShape(Map.Shape.J, x);
+                map.createShape(firstS, x);
 
 
 

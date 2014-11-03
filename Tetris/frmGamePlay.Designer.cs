@@ -31,8 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.timKeyDetector = new System.Windows.Forms.Timer(this.components);
             this.timTicker = new System.Windows.Forms.Timer(this.components);
-            this.timUpKeyDector = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnRestart = new Tetris.Controls.UnFocusableButton();
             this.board1 = new Tetris.TetrisBoard.Board();
+            this.btnFeedBack = new Tetris.Controls.UnFocusableButton();
             this.SuspendLayout();
             // 
             // timKeyDetector
@@ -47,30 +51,79 @@
             this.timTicker.Interval = 10;
             this.timTicker.Tick += new System.EventHandler(this.timTicker_Tick);
             // 
-            // timUpKeyDector
+            // label1
             // 
-            this.timUpKeyDector.Enabled = true;
-            this.timUpKeyDector.Interval = 120;
-            this.timUpKeyDector.Tick += new System.EventHandler(this.timUpKeyDector_Tick);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(332, 124);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "<--- Next Shape";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(332, 226);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "<--- Saved Shape";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(453, 124);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(151, 78);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Tetris 1.0 build 0102 by Tony\r\n\r\narrow key left, right, down\r\narrow key up to tur" +
+    "n\r\nspace to fall\r\nc key to save :)";
+            // 
+            // btnRestart
+            // 
+            this.btnRestart.Location = new System.Drawing.Point(456, 216);
+            this.btnRestart.Name = "btnRestart";
+            this.btnRestart.Size = new System.Drawing.Size(75, 23);
+            this.btnRestart.TabIndex = 4;
+            this.btnRestart.Text = "restart";
+            this.btnRestart.UseVisualStyleBackColor = true;
+            this.btnRestart.Click += new System.EventHandler(this.unFocusableButton1_Click);
             // 
             // board1
             // 
-            this.board1.Location = new System.Drawing.Point(42, 12);
+            this.board1.Location = new System.Drawing.Point(26, 28);
             this.board1.Name = "board1";
             this.board1.Size = new System.Drawing.Size(300, 400);
             this.board1.TabIndex = 0;
+            // 
+            // btnFeedBack
+            // 
+            this.btnFeedBack.Location = new System.Drawing.Point(456, 267);
+            this.btnFeedBack.Name = "btnFeedBack";
+            this.btnFeedBack.Size = new System.Drawing.Size(75, 23);
+            this.btnFeedBack.TabIndex = 5;
+            this.btnFeedBack.Text = "feedback :)";
+            this.btnFeedBack.UseVisualStyleBackColor = true;
+            this.btnFeedBack.Click += new System.EventHandler(this.btnFeedBack_Click);
             // 
             // frmGamePlay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(599, 460);
+            this.ClientSize = new System.Drawing.Size(624, 460);
+            this.Controls.Add(this.btnFeedBack);
+            this.Controls.Add(this.btnRestart);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.board1);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmGamePlay";
-            this.Text = "Form1";
+            this.Text = "Tetris";
             this.Load += new System.EventHandler(this.frmGamePlay_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmGamePlay_KeyDown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -79,7 +132,11 @@
         private System.Windows.Forms.Timer timKeyDetector;
         private TetrisBoard.Board board1;
         private System.Windows.Forms.Timer timTicker;
-        private System.Windows.Forms.Timer timUpKeyDector;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private Controls.UnFocusableButton btnRestart;
+        private Controls.UnFocusableButton btnFeedBack;
     }
 }
 

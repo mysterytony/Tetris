@@ -71,7 +71,7 @@ namespace Tetris
 
         public bool isFall = false;
 
-        public Shape saveBlock;
+        public Shape saveBlock = Shape.NULL;
         public bool canSwitch = true;
 
         public Map(int x, int y)
