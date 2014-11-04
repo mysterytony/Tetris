@@ -228,6 +228,8 @@ namespace Tetris
         public bool createShape(Shape s, int x)
         {
             isFall = false;
+            bool isKO = false;
+
             for (int i = 0; i < this.x; ++i)
             {
                 if (map[i, 0].blockStatus == Block.Block_Status.STOPPED)//game over
@@ -254,11 +256,16 @@ namespace Tetris
                         //					map[x + 1,0].blockStatus = Block_Status.MOVING;
                         //					map[x + 2,0].blockStatus = Block_Status.MOVING;
                         //					map[x + 3,0].blockStatus = Block_Status.MOVING;
+
+                        if (isBlockStoped(x, 0) || isBlockStoped(x + 1, 0) || isBlockStoped(x + 2, 0) || isBlockStoped(x + 3, 0))
+                        {
+                            isKO = true;
+                        }
                         map[x, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 2, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 3, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                        return true;
+                        break;
                     }
                 case Shape.J:
                     {
@@ -266,11 +273,16 @@ namespace Tetris
                         {
                             return false;
                         }
+
+                        if (isBlockStoped(x, 0) || isBlockStoped(x + 1, 0) || isBlockStoped(x + 2, 0) || isBlockStoped(x + 2, 1))
+                        {
+                            isKO = true;
+                        }
                         map[x, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 2, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 2, 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                        return true;
+                        break;
                     }
                 case Shape.L:
                     {
@@ -278,11 +290,16 @@ namespace Tetris
                         {
                             return false;
                         }
+
+                        if (isBlockStoped(x, 0) || isBlockStoped(x + 1, 0) || isBlockStoped(x + 2, 0) || isBlockStoped(x, 1))
+                        {
+                            isKO = true;
+                        }
                         map[x, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 2, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x, 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                        return true;
+                        break;
                     }
                 case Shape.O:
                     {
@@ -290,11 +307,16 @@ namespace Tetris
                         {
                             return false;
                         }
+
+                        if (isBlockStoped(x, 0) || isBlockStoped(x + 1, 0) || isBlockStoped(x, 1) || isBlockStoped(x + 1, 1))
+                        {
+                            isKO = true;
+                        }
                         map[x, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x, 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                        return true;
+                        break;
                     }
                 case Shape.S:
                     {
@@ -302,11 +324,16 @@ namespace Tetris
                         {
                             return false;
                         }
+
+                        if (isBlockStoped(x, 1) || isBlockStoped(x + 1, 0) || isBlockStoped(x + 1, 1) || isBlockStoped(x + 2, 0))
+                        {
+                            isKO = true;
+                        }
                         map[x, 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 2, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                        return true;
+                        break;
                     }
                 case Shape.T:
                     {
@@ -314,11 +341,16 @@ namespace Tetris
                         {
                             return false;
                         }
+
+                        if (isBlockStoped(x, 0) || isBlockStoped(x + 1, 0) || isBlockStoped(x + 2, 0) || isBlockStoped(x + 1, 1))
+                        {
+                            isKO = true;
+                        }
                         map[x, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 2, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                        return true;
+                        break;
                     }
                 case Shape.Z:
                     {
@@ -326,17 +358,29 @@ namespace Tetris
                         {
                             return false;
                         }
+
+                        if (isBlockStoped(x, 0) || isBlockStoped(x + 1, 0) || isBlockStoped(x + 1, 1) || isBlockStoped(x + 2, 1))
+                        {
+                            isKO = true;
+                        }
                         map[x, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 0].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 1, 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                         map[x + 2, 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                        return true;
+                        break;
                     }
                 default:
                     {
                         return false;
                     }
             }
+
+            return !isKO;
+        }
+
+        public bool isBlockStoped(int y, int x)
+        {
+            return getBlockStatus(y, x) == Block.Block_Status.STOPPED;
         }
 
 

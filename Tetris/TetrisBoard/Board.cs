@@ -42,7 +42,7 @@ namespace Tetris.TetrisBoard
         {
 
 
-            this.Width = 350;
+            this.Width = 400;
             this.Height = 400;
             //boardMode bm = boardMode.play
             this.board_mode = boardMode.play;
@@ -65,6 +65,8 @@ namespace Tetris.TetrisBoard
 
             lblTime.Location = new Point(210, 10);
             lblScore.Location = new Point(210, 40);
+            lblScore.AutoSize = false;
+            lblScore.Size = new Size(150, 15);
 
             this.Controls.Add(lblTime);
             this.Controls.Add(picNext);
@@ -145,15 +147,16 @@ namespace Tetris.TetrisBoard
             if (rowCleaned > 0 && combo > 0)
             {
                 // bonus score
-                this.score += rowCleaned * combo * 2;
+                this.score += (rowCleaned * combo * 2 + (int)Math.Pow(combo+1,rowCleaned));
+                combo++;
                 this.displayScore(true);
 
             }
             else if (rowCleaned > 0 && combo <= 0)
             {
                 //normal score
-                this.score += rowCleaned;
-                this.combo += rowCleaned;
+                this.score += (rowCleaned + (int)Math.Pow(2, rowCleaned));
+                this.combo ++;
                 this.displayScore(false);
 
             }
@@ -297,8 +300,6 @@ namespace Tetris.TetrisBoard
                 createGameOver();
                
 
-
-                return;
             }
 
 

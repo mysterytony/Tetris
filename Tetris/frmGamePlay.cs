@@ -13,6 +13,7 @@ namespace Tetris
 {
     public partial class frmGamePlay : Form
     {
+        int keyLeftTimeCounter = 0, keyRightTimeCounter;
 
 
 
@@ -36,16 +37,27 @@ namespace Tetris
 
         private void timKeyDetector_Tick(object sender, EventArgs e)
         {
-            
+
             leftKey = Keyboard.IsKeyDown(Keys.Left);
             rightKey = Keyboard.IsKeyDown(Keys.Right);
 
-            
-
             if (leftKey)
+            {
+                keyLeftTimeCounter++;
+            }
+            if (rightKey)
+            {
+                keyRightTimeCounter++;
+            }
+
+
+            if (leftKey && keyLeftTimeCounter > 0)
+            {
                 board1.keyPressed(Keys.Left);
 
-            if (rightKey)
+            }
+
+            if (rightKey && keyRightTimeCounter > 0)
                 board1.keyPressed(Keys.Right);
         }
 
@@ -56,28 +68,21 @@ namespace Tetris
 
         private void frmGamePlay_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void frmGamePlay_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            
 
 
-            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+
+            if ((e.KeyCode == Keys.Left && keyLeftTimeCounter < 1) || (e.KeyCode == Keys.Right && keyRightTimeCounter < 1))
                 return;
 
             board1.keyPressed(e.KeyCode);
 
         }
 
-        //private void timUpKeyDector_Tick(object sender, EventArgs e)
-        //{
-        //    upKey = Keyboard.IsKeyDown(Keys.Up);
-
-        //    if (upKey)
-        //        board1.keyPressed(Keys.Up);
-        //}
 
 
 
@@ -89,9 +94,16 @@ namespace Tetris
 
         private void btnFeedBack_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("mailto:lihenantony1997@gmail.com");
+            //System.Diagnostics.Process.Start("mailto:lihenantony1997@gmail.com");
+            System.Diagnostics.Process.Start("mailto:lihenantony1997@gmail.com?subject=Tetris Feedback");
         }
 
-        
+        private void frmGamePlay_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            keyLeftTimeCounter = 0;
+            keyRightTimeCounter = 0;
+        }
+
+
     }
 }
