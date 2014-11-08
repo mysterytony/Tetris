@@ -111,6 +111,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\UnFocusableSlider.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\UnFocusableNumPick.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\UnFocusableButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -159,16 +165,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\blue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\cyan.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\empty.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\green.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\I.png" />
@@ -183,6 +180,27 @@
     <None Include="Resources\O.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\S.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\T.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Z.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shape_Empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cyan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\orange.png" />
   </ItemGroup>
   <ItemGroup>
@@ -195,19 +213,7 @@
     <None Include="Resources\red.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\S.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\T.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\yellow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Z.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Shape_Empty.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

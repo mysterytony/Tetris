@@ -17,6 +17,7 @@ namespace Tetris.TetrisBoard
 
 
         public bool isGameOver = false;
+        public bool isKO = false;
 
         public Label lblTime = new Label();
         public Label lblScore = new Label();
@@ -36,6 +37,7 @@ namespace Tetris.TetrisBoard
         public int totaltime = 120;//in second
 
         public boardMode board_mode;
+        
 
         public Board()
             : base()
@@ -86,6 +88,7 @@ namespace Tetris.TetrisBoard
             //this.board = new BlockInBoard[10, 20];
 
             isGameOver = false;
+            isKO = false;
              score = 0;
             combo = 0;
          interval = 1000;//milisecond
@@ -220,6 +223,12 @@ namespace Tetris.TetrisBoard
             if (isGameOver)
                 return;
 
+            if (isKO)
+            {
+                map.cleanAll();
+                isKO = false;
+            }
+
             timecounter += 10;
 
             runningcounter += 10;
@@ -294,7 +303,12 @@ namespace Tetris.TetrisBoard
 
             }
 
-            if (!e || timecounter >= (totaltime * 1000))
+            if(!e)
+            {
+                isKO = true;
+            }
+
+            if (timecounter >= (totaltime * 1000))
             {
 
                 createGameOver();

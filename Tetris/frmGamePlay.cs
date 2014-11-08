@@ -51,14 +51,6 @@ namespace Tetris
             }
 
 
-            if (leftKey && keyLeftTimeCounter > 0)
-            {
-                board1.keyPressed(Keys.Left);
-
-            }
-
-            if (rightKey && keyRightTimeCounter > 0)
-                board1.keyPressed(Keys.Right);
         }
 
         private void timTicker_Tick(object sender, EventArgs e)
@@ -76,7 +68,7 @@ namespace Tetris
 
 
 
-            if ((e.KeyCode == Keys.Left && keyLeftTimeCounter < 1) || (e.KeyCode == Keys.Right && keyRightTimeCounter < 1))
+            if ((e.KeyCode == Keys.Left && keyLeftTimeCounter > 1) || (e.KeyCode == Keys.Right && keyRightTimeCounter > 1))
                 return;
 
             board1.keyPressed(e.KeyCode);
@@ -103,6 +95,32 @@ namespace Tetris
             keyLeftTimeCounter = 0;
             keyRightTimeCounter = 0;
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            if (leftKey && keyLeftTimeCounter > 1)
+            {
+                board1.keyPressed(Keys.Left);
+
+            }
+
+            if (rightKey && keyRightTimeCounter > 1)
+                board1.keyPressed(Keys.Right);
+        }
+
+        private void sliderSens_Scroll(object sender, EventArgs e)
+        {
+             numpickSens.Value =   sliderSens.Value;
+             timKeyHold.Interval = sliderSens.Value;
+        }
+
+        private void numpickSens_ValueChanged(object sender, EventArgs e)
+        {
+            sliderSens.Value = (int)numpickSens.Value;
+        }
+
+       
 
 
     }

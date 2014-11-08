@@ -386,564 +386,573 @@ namespace Tetris
 
         public bool turn()
         {
-            stage++;
-            switch (currentShape)
+            try
             {
-                case Shape.I:
-                    {
-                        if (stage == 1)
+                stage++;
+                switch (currentShape)
+                {
+                    case Shape.I:
                         {
-                            if (movingY <= (this.y - 4))
-                                if (map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX, movingY + 3].blockStatus != Block.Block_Status.STOPPED)
-                                {
-                                    map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX, movingY + 3].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                            if (stage == 1)
+                            {
+                                if (movingY <= (this.y - 4))
+                                    if (map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX, movingY + 3].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX, movingY + 3].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
+                                        map[movingX + 1, movingY].createEmpty();
+                                        map[movingX + 2, movingY].createEmpty();
+                                        map[movingX + 3, movingY].createEmpty();
+                                        return true;
+                                    }
+
+                                if (movingY > (this.y - 4))
+                                {
+                                    break;
+                                }
+                                if (map[movingX + 3, movingY + 1].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX + 3, movingY + 2].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX + 3, movingY + 3].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX + 3, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX + 3, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX + 3, movingY + 3].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                    map[movingX, movingY].createEmpty();
                                     map[movingX + 1, movingY].createEmpty();
                                     map[movingX + 2, movingY].createEmpty();
-                                    map[movingX + 3, movingY].createEmpty();
+                                    movingX += 3;
                                     return true;
                                 }
+                                else
+                                    break;
 
-                            if (movingY > (this.y - 4))
-                            {
-                                break;
                             }
-                            if (map[movingX + 3, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX + 3, movingY + 2].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX + 3, movingY + 3].blockStatus != Block.Block_Status.STOPPED)
+                            else if (stage == 2)
                             {
-                                map[movingX + 3, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX + 3, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX + 3, movingY + 3].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
-                                map[movingX, movingY].createEmpty();
-                                map[movingX + 1, movingY].createEmpty();
-                                map[movingX + 2, movingY].createEmpty();
-                                movingX += 3;
-                                return true;
-                            }
-                            else
-                                break;
+                                if (movingX <= (this.x - 4))
 
-                        }
-                        else if (stage == 2)
-                        {
+                                    if (map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 3, movingY].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 3, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
-                            if (movingX <= (this.x - 4))
+                                        map[movingX, movingY + 1].createEmpty();
+                                        map[movingX, movingY + 2].createEmpty();
+                                        map[movingX, movingY + 3].createEmpty();
+                                        stage = 0;
+                                        return true;
+                                    }
 
-                                if (map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX + 3, movingY].blockStatus != Block.Block_Status.STOPPED)
+                                if (movingX < 4)// not enough space
                                 {
-                                    map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX + 3, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    break;
+                                }
+                                if (map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX - 2, movingY].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX - 3, movingY].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX - 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX - 3, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
                                     map[movingX, movingY + 1].createEmpty();
                                     map[movingX, movingY + 2].createEmpty();
                                     map[movingX, movingY + 3].createEmpty();
                                     stage = 0;
+                                    movingX -= 3;
                                     return true;
                                 }
+                                else
+                                    break;
 
-                            if (movingX < 4)// not enough space
-                            {
-                                break;
-                            }
-                            if (map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX - 2, movingY].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX - 3, movingY].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX - 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX - 3, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX, movingY + 1].createEmpty();
-                                map[movingX, movingY + 2].createEmpty();
-                                map[movingX, movingY + 3].createEmpty();
-                                stage = 0;
-                                movingX -= 3;
-                                return true;
                             }
                             else
                                 break;
-
                         }
-                        else
+
+                    case Shape.O:
+                        {
                             break;
-                    }
-
-                case Shape.O:
-                    {
-                        break;
-                    }
-
-                case Shape.Z:
-                    {
-                        if (stage == 1)
-                        {
-                            if (movingY > (this.y - 3))
-                            {
-                                break;
-                            }
-                            if (map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX, movingY].createEmpty();
-                                map[movingX + 2, movingY + 1].createEmpty();
-                                return true;
-                            }
-                            else
-                                break;
                         }
-                        else if (stage == 2)
+
+                    case Shape.Z:
                         {
-                            if (movingX <= (this.x - 3))
+                            if (stage == 1)
+                            {
+                                if (movingY > (this.y - 3))
+                                {
+                                    break;
+                                }
+                                if (map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                    map[movingX, movingY].createEmpty();
+                                    map[movingX + 2, movingY + 1].createEmpty();
+                                    return true;
+                                }
+                                else
+                                    break;
+                            }
+                            else if (stage == 2)
+                            {
+                                if (movingX <= (this.x - 3))
+
+                                    if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 2, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 2, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                        map[movingX, movingY + 2].createEmpty();
+                                        map[movingX, movingY + 1].createEmpty();
+                                        stage = 0;
+                                        return true;
+                                    }
+
+                                if (movingX < 0)
+                                    break;
 
                                 if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX + 2, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                        && map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED)
                                 {
                                     map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX + 2, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
+                                    map[movingX + 1, movingY].createEmpty();
                                     map[movingX, movingY + 2].createEmpty();
-                                    map[movingX, movingY + 1].createEmpty();
                                     stage = 0;
+                                    movingX--;
                                     return true;
                                 }
-
-                            if (movingX < 0)
-                                break;
-
-                            if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX + 1, movingY].createEmpty();
-                                map[movingX, movingY + 2].createEmpty();
-                                stage = 0;
-                                movingX--;
-                                return true;
+                                else break;
                             }
-                            else break;
+
+                            break;
                         }
 
-                        break;
-                    }
-
-                case Shape.S:
-                    {
-                        if (stage == 1)
+                    case Shape.S:
                         {
-                            if (movingY < (this.y - 3))
+                            if (stage == 1)
+                            {
+                                if (movingY < (this.y - 3))
 
-                                if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
+                                    if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 1, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX + 1, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                        map[movingX + 1, movingY].createEmpty();
+                                        map[movingX + 2, movingY].createEmpty();
+                                        return true;
+                                    }
+                                    else
+                                        break;
+                            }
+                            else if (stage == 2)
+                            {
+
+                                if (movingX <= (this.x - 3))
+
+                                    if (map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                        map[movingX, movingY].createEmpty();
+                                        map[movingX + 1, movingY + 2].createEmpty();
+                                        stage = 0;
+                                        return true;
+                                    }
+
+                                if (movingX < 0)
+                                    break;
+                                if (map[movingX - 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX - 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                    map[movingX + 1, movingY + 1].createEmpty();
+                                    map[movingX + 1, movingY + 2].createEmpty();
+                                    stage = 0;
+                                    movingX--;
+                                    return true;
+                                }
+                                else
+                                    break;
+
+
+                            }
+                            break;
+                        }
+
+                    case Shape.T:
+                        {
+                            if (stage == 1)
+                            {
+                                if (movingY > (this.y - 3))
+                                {
+                                    break;
+                                }
+                                if (map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
                                         && map[movingX + 1, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
                                 {
                                     map[movingX + 1, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
-                                    map[movingX + 1, movingY].createEmpty();
+                                    map[movingX, movingY].createEmpty();
                                     map[movingX + 2, movingY].createEmpty();
                                     return true;
                                 }
                                 else
                                     break;
-                        }
-                        else if (stage == 2)
-                        {
-
-                            if (movingX <= (this.x - 3))
-
-                                if (map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED)
-                                {
-                                    map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                    map[movingX, movingY].createEmpty();
-                                    map[movingX + 1, movingY + 2].createEmpty();
-                                    stage = 0;
-                                    return true;
-                                }
-
-                            if (movingX < 0)
-                                break;
-                            if (map[movingX - 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX - 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX + 1, movingY + 1].createEmpty();
-                                map[movingX + 1, movingY + 2].createEmpty();
-                                stage = 0;
-                                movingX--;
-                                return true;
                             }
-                            else
-                                break;
-
-
-                        }
-                        break;
-                    }
-
-                case Shape.T:
-                    {
-                        if (stage == 1)
-                        {
-                            if (movingY > (this.y - 3))
+                            else if (stage == 2)
                             {
-                                break;
-                            }
-                            if (map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX + 1, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX + 1, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                if (movingX <= (this.x - 3))
 
-                                map[movingX, movingY].createEmpty();
-                                map[movingX + 2, movingY].createEmpty();
-                                return true;
-                            }
-                            else
-                                break;
-                        }
-                        else if (stage == 2)
-                        {
-                            if (movingX <= (this.x - 3))
+                                    if (map[movingX + 2, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX + 2, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
-                                if (map[movingX + 2, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
-                                {
-                                    map[movingX + 2, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 1, movingY + 2].createEmpty();
+                                        return true;
+                                    }
 
-                                    map[movingX + 1, movingY + 2].createEmpty();
-                                    return true;
-                                }
-
-                            if (movingX < 0)
-                                break;
-                            if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED &&
-                                    map[movingX - 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX - 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX + 1, movingY].createEmpty();
-                                map[movingX + 1, movingY + 2].createEmpty();
-                                movingX--;
-                                return true;
-                            }
-                            else break;
-
-                        }
-                        else if (stage == 3)
-                        {
-                            if (movingY > (this.y - 3))
-                            {
-                                break;
-                            }
-                            if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX + 1, movingY].createEmpty();
-                                map[movingX + 2, movingY + 1].createEmpty();
-                                return true;
-                            }
-                            else
-                                break;
-                        }
-                        else if (stage == 4)
-                        {
-                            if (movingX <= (this.x - 3))
-
-                                if (map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED)
-                                {
-                                    map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                    map[movingX, movingY + 2].createEmpty();
-                                    map[movingX, movingY + 1].createEmpty();
-                                    stage = 0;
-                                    return true;
-                                }
-
-                            if (movingX < 0)
-                                break;
-                            if (map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED &&
-                                    map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX, movingY + 2].createEmpty();
-                                map[movingX + 1, movingY + 1].createEmpty();
-
-                                stage = 0;
-                                movingX--;
-                                return true;
-                            }
-                            else break;
-                        }
-                        break;
-                    }
-
-                case Shape.J:
-                    {
-                        if (stage == 1)
-                        {
-                            if (movingY > (this.y - 3))
-                            {
-                                break;
-                            }
-                            if (map[movingX + 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX + 1, movingY + 2].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX + 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX + 1, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX, movingY].createEmpty();
-                                map[movingX + 2, movingY].createEmpty();
-                                map[movingX + 2, movingY + 1].createEmpty();
-                                return true;
-                            }
-                            else
-                                break;
-
-                        }
-                        else if (stage == 2)
-                        {
-                            if (movingX <= (this.x - 3))
-
-                                if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX + 2, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                if (movingX < 0)
+                                    break;
+                                if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED &&
+                                        map[movingX - 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
                                 {
                                     map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX - 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                    map[movingX + 1, movingY].createEmpty();
+                                    map[movingX + 1, movingY + 2].createEmpty();
+                                    movingX--;
+                                    return true;
+                                }
+                                else break;
+
+                            }
+                            else if (stage == 3)
+                            {
+                                if (movingY > (this.y - 3))
+                                {
+                                    break;
+                                }
+                                if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                    map[movingX + 1, movingY].createEmpty();
+                                    map[movingX + 2, movingY + 1].createEmpty();
+                                    return true;
+                                }
+                                else
+                                    break;
+                            }
+                            else if (stage == 4)
+                            {
+                                if (movingX <= (this.x - 3))
+
+                                    if (map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                        map[movingX, movingY + 2].createEmpty();
+                                        map[movingX, movingY + 1].createEmpty();
+                                        stage = 0;
+                                        return true;
+                                    }
+
+                                if (movingX < 0)
+                                    break;
+                                if (map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED &&
+                                        map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                    map[movingX, movingY + 2].createEmpty();
+                                    map[movingX + 1, movingY + 1].createEmpty();
+
+                                    stage = 0;
+                                    movingX--;
+                                    return true;
+                                }
+                                else break;
+                            }
+                            break;
+                        }
+
+                    case Shape.J:
+                        {
+                            if (stage == 1)
+                            {
+                                if (movingY > (this.y - 3))
+                                {
+                                    break;
+                                }
+                                if (map[movingX + 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX + 1, movingY + 2].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX + 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX + 1, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                    map[movingX, movingY].createEmpty();
+                                    map[movingX + 2, movingY].createEmpty();
+                                    map[movingX + 2, movingY + 1].createEmpty();
+                                    return true;
+                                }
+                                else
+                                    break;
+
+                            }
+                            else if (stage == 2)
+                            {
+                                if (movingX <= (this.x - 3))
+
+                                    if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 2, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 2, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                        map[movingX + 1, movingY].createEmpty();
+                                        map[movingX + 1, movingY + 2].createEmpty();
+                                        map[movingX, movingY + 2].createEmpty();
+                                        return true;
+                                    }
+
+                                if (movingX < 0)
+                                    break;
+
+                                if (map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX - 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX - 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
                                     map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX + 2, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
                                     map[movingX + 1, movingY].createEmpty();
                                     map[movingX + 1, movingY + 2].createEmpty();
                                     map[movingX, movingY + 2].createEmpty();
+                                    movingX--;
                                     return true;
                                 }
-
-                            if (movingX < 0)
-                                break;
-
-                            if (map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX - 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX - 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX + 1, movingY].createEmpty();
-                                map[movingX + 1, movingY + 2].createEmpty();
-                                map[movingX, movingY + 2].createEmpty();
-                                movingX--;
-                                return true;
+                                else break;
                             }
-                            else break;
-                        }
 
-                        else if (stage == 3)
-                        {
-                            if (movingY > (this.y - 3))
+                            else if (stage == 3)
                             {
-                                break;
-                            }
-                            if (map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX + 1, movingY + 1].createEmpty();
-                                map[movingX + 2, movingY + 1].createEmpty();
-                                return true;
-                            }
-                            else
-                                break;
-                        }
-                        else if (stage == 4)
-                        {
-                            if (movingX <= (this.x - 3))
-
-                                if (map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX + 2, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                if (movingY > (this.y - 3))
                                 {
-                                    map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX + 2, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    break;
+                                }
+                                if (map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                    map[movingX + 1, movingY + 1].createEmpty();
+                                    map[movingX + 2, movingY + 1].createEmpty();
+                                    return true;
+                                }
+                                else
+                                    break;
+                            }
+                            else if (stage == 4)
+                            {
+                                if (movingX <= (this.x - 3))
+
+                                    if (map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 2, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 2, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                        map[movingX, movingY + 1].createEmpty();
+                                        map[movingX, movingY + 2].createEmpty();
+                                        stage = 0;
+                                        return true;
+                                    }
+
+                                if (movingX < 0)
+                                    break;
+
+                                if (map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX + 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX + 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
                                     map[movingX, movingY + 1].createEmpty();
                                     map[movingX, movingY + 2].createEmpty();
                                     stage = 0;
+                                    movingX--;
                                     return true;
                                 }
-
-                            if (movingX < 0)
-                                break;
-
-                            if (map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX + 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX + 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX, movingY + 1].createEmpty();
-                                map[movingX, movingY + 2].createEmpty();
-                                stage = 0;
-                                movingX--;
-                                return true;
+                                else break;
                             }
-                            else break;
+
+                            break;
                         }
 
-                        break;
-                    }
-
-                case Shape.L:
-                    {
-                        if (stage == 1)
+                    case Shape.L:
                         {
-                            if (movingY > (this.y - 3))
+                            if (stage == 1)
                             {
-                                break;
+                                if (movingY > (this.y - 3))
+                                {
+                                    break;
+                                }
+                                if (map[movingX + 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX + 1, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX + 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX + 1, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                    map[movingX, movingY + 1].createEmpty();
+                                    map[movingX + 2, movingY].createEmpty();
+                                    return true;
+                                }
+                                else
+                                    break;
                             }
-                            if (map[movingX + 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX + 1, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
+                            else if (stage == 2)
                             {
-                                map[movingX + 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX + 1, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                if (movingX <= (this.x - 3))
 
-                                map[movingX, movingY + 1].createEmpty();
-                                map[movingX + 2, movingY].createEmpty();
-                                return true;
-                            }
-                            else
-                                break;
-                        }
-                        else if (stage == 2)
-                        {
-                            if (movingX <= (this.x - 3))
+                                    if (map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 2, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 2, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
+                                        map[movingX, movingY].createEmpty();
+                                        map[movingX + 1, movingY].createEmpty();
+                                        map[movingX + 1, movingY + 2].createEmpty();
+
+                                        return true;
+                                    }
+
+                                if (movingX < 0)
+                                    break;
                                 if (map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX + 2, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                        && map[movingX - 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
                                 {
                                     map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX + 2, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX - 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
                                     map[movingX, movingY].createEmpty();
-                                    map[movingX + 1, movingY].createEmpty();
                                     map[movingX + 1, movingY + 2].createEmpty();
 
+                                    movingX--;
                                     return true;
                                 }
 
-                            if (movingX < 0)
-                                break;
-                            if (map[movingX, movingY + 1].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX - 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX - 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX, movingY].createEmpty();
-                                map[movingX + 1, movingY + 2].createEmpty();
-
-                                movingX--;
-                                return true;
                             }
 
-                        }
-
-                        else if (stage == 3)
-                        {
-                            if (movingY > (this.y - 3))
+                            else if (stage == 3)
                             {
-                                break;
-                            }
-                            if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX + 1, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX + 1, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX + 2, movingY].createEmpty();
-                                map[movingX + 2, movingY + 1].createEmpty();
-                                map[movingX + 1, movingY + 1].createEmpty();
-
-                                return true;
-                            }
-                            else
-                                break;
-                        }
-
-                        else if (stage == 4)
-                        {
-                            if (movingX <= (this.x - 3))
-
-                                if (map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED
-                                        && map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED)
+                                if (movingY > (this.y - 3))
                                 {
-                                    map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                    map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    break;
+                                }
+                                if (map[movingX, movingY].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX, movingY + 2].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX + 1, movingY + 2].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX + 1, movingY + 2].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
 
+                                    map[movingX + 2, movingY].createEmpty();
+                                    map[movingX + 2, movingY + 1].createEmpty();
+                                    map[movingX + 1, movingY + 1].createEmpty();
+
+                                    return true;
+                                }
+                                else
+                                    break;
+                            }
+
+                            else if (stage == 4)
+                            {
+                                if (movingX <= (this.x - 3))
+
+                                    if (map[movingX + 2, movingY].blockStatus != Block.Block_Status.STOPPED
+                                            && map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED)
+                                    {
+                                        map[movingX + 2, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                        map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                        map[movingX, movingY + 2].createEmpty();
+                                        map[movingX + 1, movingY + 2].createEmpty();
+                                        stage = 0;
+
+                                        return true;
+                                    }
+
+                                if (movingX < 0)
+                                    break;
+
+                                if (map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED
+                                        && map[movingX - 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
+                                {
+                                    map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+                                    map[movingX - 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
+
+                                    map[movingX, movingY + 1].createEmpty();
                                     map[movingX, movingY + 2].createEmpty();
                                     map[movingX + 1, movingY + 2].createEmpty();
+
+                                    movingX--;
                                     stage = 0;
 
                                     return true;
                                 }
-
-                            if (movingX < 0)
-                                break;
-
-                            if (map[movingX + 1, movingY].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX - 1, movingY].blockStatus != Block.Block_Status.STOPPED
-                                    && map[movingX - 1, movingY + 1].blockStatus != Block.Block_Status.STOPPED)
-                            {
-                                map[movingX + 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX - 1, movingY].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-                                map[movingX - 1, movingY + 1].setStatus(Block.Block_Status.MOVING, getShapeColor(currentShape));
-
-                                map[movingX, movingY + 1].createEmpty();
-                                map[movingX, movingY + 2].createEmpty();
-                                map[movingX + 1, movingY + 2].createEmpty();
-
-                                movingX--;
-                                stage = 0;
-
-                                return true;
                             }
+                            break;
                         }
-                        break;
-                    }
+                }
+                stage--;
+
             }
-            stage--;
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
             return false;
         }
 
@@ -1278,6 +1287,17 @@ namespace Tetris
             return map[y,x].blockColor;
         }
 
+
+        public void cleanAll()
+        {
+            for (int i=0;i<x;++i)
+            {
+                for (int j=0;j<y;++j)
+                {
+                    map[i, j].createEmpty();
+                }
+            }
+        }
 
     }
 }
