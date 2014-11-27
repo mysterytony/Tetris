@@ -37,12 +37,13 @@ namespace Tetris.TetrisBoard
         public int totaltime = 120;//in second
 
         public boardMode board_mode;
+
+        public bool isTimeInfinate = false;
         
 
         public Board()
             : base()
         {
-
 
             this.Width = 400;
             this.Height = 400;
@@ -77,8 +78,14 @@ namespace Tetris.TetrisBoard
 
             refreshMap();
             displayScore(false);
-            this.displayTime();
+            
 
+        }
+
+        public void start(bool isTimeInfinate)
+        {
+            this.isTimeInfinate = isTimeInfinate;
+            this.displayTime();
         }
 
         public void reinit()
@@ -172,6 +179,9 @@ namespace Tetris.TetrisBoard
 
         public void displayTime()
         {
+            if (isTimeInfinate)
+                return;
+
             int leftTime = (totaltime * 1000 - timecounter)/1000;
 
             lblTime.Text = "time: " + leftTime / 60 + ":" + (leftTime % 60 < 10 ? "0" : "") + leftTime % 60;
@@ -229,7 +239,8 @@ namespace Tetris.TetrisBoard
                 isKO = false;
             }
 
-            timecounter += 10;
+            if (!isTimeInfinate)
+                timecounter += 10;
 
             runningcounter += 10;
 
@@ -308,14 +319,17 @@ namespace Tetris.TetrisBoard
                 isKO = true;
             }
 
-            if (timecounter >= (totaltime * 1000))
+            if (!isTimeInfinate && timecounter >= (totaltime * 1000))
             {
 
                 createGameOver();
-               
-
+             
             }
 
+            if (isTimeInfinate && isKO)
+            {
+                createGameOver();
+            }
 
             if (runningcounter >= interval)
             {

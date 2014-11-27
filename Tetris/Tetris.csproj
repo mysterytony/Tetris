@@ -120,6 +120,12 @@
     <Compile Include="Controls\UnFocusableButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="frmMultiplayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMultiplayer.Designer.cs">
+      <DependentUpon>frmMultiplayer.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGamePlay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TetrisBoard\Block.cs" />
+    <EmbeddedResource Include="frmMultiplayer.resx">
+      <DependentUpon>frmMultiplayer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGamePlay.resx">
       <DependentUpon>frmGamePlay.cs</DependentUpon>
     </EmbeddedResource>

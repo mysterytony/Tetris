@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace Tetris
 {
-    public partial class frmGamePlay : Form
+    public partial class frmMultiplayer : Form
     {
         int keyLeftTimeCounter = 0, keyRightTimeCounter;
 
@@ -29,7 +29,7 @@ namespace Tetris
 
 
 
-        public frmGamePlay(int timelimit = 0)
+        public frmMultiplayer(int timelimit = 0)
         {
             InitializeComponent();
 

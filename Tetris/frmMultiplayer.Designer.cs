@@ -1,6 +1,6 @@
 ﻿namespace Tetris
 {
-    partial class frmGamePlay
+    partial class frmMultiplayer
     {
         /// <summary>
         /// Required designer variable.
@@ -71,7 +71,7 @@
             this.boardMain.Size = new System.Drawing.Size(333, 400);
             this.boardMain.TabIndex = 0;
             // 
-            // frmGamePlay
+            // frmMultiplayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -79,7 +79,7 @@
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.boardMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "frmGamePlay";
+            this.Name = "frmMultiplayer";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tetris";
