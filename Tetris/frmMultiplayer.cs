@@ -29,20 +29,14 @@ namespace Tetris
 
 
 
-        public frmMultiplayer(int timelimit = 0)
+        public frmMultiplayer(int timelimit, string ip)
         {
             InitializeComponent();
 
-            if (timelimit != 0)
-            {
-                boardMain.totaltime = timelimit;
-                this.Text = "Tetris - Time Limit Mode";
-            }
-            else
-            {
-                boardMain.isTimeInfinate = true;
-                this.Text = "Tetris - Endless Mode";
-            }
+          
+             boardMain.totaltime = timelimit;
+             this.Text = "Tetris - Multiplayer Mode";
+            
 
             
         }

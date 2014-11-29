@@ -34,6 +34,7 @@
             this.timKeyHold = new System.Windows.Forms.Timer(this.components);
             this.btnQuit = new Tetris.Controls.UnFocusableButton();
             this.boardMain = new Tetris.TetrisBoard.Board();
+            this.board1 = new Tetris.TetrisBoard.Board();
             this.SuspendLayout();
             // 
             // timKeyDetector
@@ -56,7 +57,7 @@
             // 
             // btnQuit
             // 
-            this.btnQuit.Location = new System.Drawing.Point(365, 28);
+            this.btnQuit.Location = new System.Drawing.Point(794, 28);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(123, 23);
             this.btnQuit.TabIndex = 1;
@@ -71,11 +72,19 @@
             this.boardMain.Size = new System.Drawing.Size(333, 400);
             this.boardMain.TabIndex = 0;
             // 
+            // board1
+            // 
+            this.board1.Location = new System.Drawing.Point(388, 28);
+            this.board1.Name = "board1";
+            this.board1.Size = new System.Drawing.Size(400, 400);
+            this.board1.TabIndex = 2;
+            // 
             // frmMultiplayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 450);
+            this.ClientSize = new System.Drawing.Size(937, 450);
+            this.Controls.Add(this.board1);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.boardMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -97,6 +106,7 @@
         private System.Windows.Forms.Timer timTicker;
         private System.Windows.Forms.Timer timKeyHold;
         private Controls.UnFocusableButton btnQuit;
+        private TetrisBoard.Board board1;
     }
 }
 
