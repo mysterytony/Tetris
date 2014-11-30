@@ -110,9 +110,38 @@ namespace Tetris.TetrisBoard
             this.displayScore(false);
         }
 
-        public void refersh(String msg)//BlockInBoard[,] board, int s, bool isCombo)
+
+
+        public void setBoard(string msg)//BlockInBoard[,] board, int s, bool isCombo)
         {
-            
+            string[] blks = msg.Split('|');
+            //int line = Convert.ToInt16(blks[0]);
+
+            //for (int i=0;i<10;++i)
+            //{
+            //    if (blks[i + 1] == "Empty")
+            //        map.map[i, line].createEmpty();
+            //    else
+            //    {
+                    
+            //        Color c = Color.FromName( blks[i + 1]);
+            //        map.map[i, line].setColor(c);
+            //    }
+            //}
+
+            for (int line = 0; line < 20;++line )
+            {
+                for (int i = 0; i < 10; ++i)
+                {
+                    
+                        Color c = Color.FromName(blks[line * 11 + i + 1]);
+                        map.map[i, line].setColor(c);
+                    
+                }
+            }
+
+
+                
         }
 
 

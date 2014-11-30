@@ -20,7 +20,7 @@ namespace Tetris.TetrisBoard
 
         
 
-        public Color blockColor;
+        public Color blockColor = Color.Empty;
         public Block_Status blockStatus;
 
         /// <summary>

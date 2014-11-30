@@ -32,9 +32,10 @@
             this.timKeyDetector = new System.Windows.Forms.Timer(this.components);
             this.timTicker = new System.Windows.Forms.Timer(this.components);
             this.timKeyHold = new System.Windows.Forms.Timer(this.components);
+            this.timSender = new System.Windows.Forms.Timer(this.components);
+            this.boardSecondPlayer = new Tetris.TetrisBoard.Board();
             this.btnQuit = new Tetris.Controls.UnFocusableButton();
             this.boardMain = new Tetris.TetrisBoard.Board();
-            this.board1 = new Tetris.TetrisBoard.Board();
             this.SuspendLayout();
             // 
             // timKeyDetector
@@ -55,6 +56,19 @@
             this.timKeyHold.Interval = 160;
             this.timKeyHold.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timSender
+            // 
+            this.timSender.Enabled = true;
+            this.timSender.Interval = 1;
+            this.timSender.Tick += new System.EventHandler(this.timSender_Tick);
+            // 
+            // boardSecondPlayer
+            // 
+            this.boardSecondPlayer.Location = new System.Drawing.Point(388, 28);
+            this.boardSecondPlayer.Name = "boardSecondPlayer";
+            this.boardSecondPlayer.Size = new System.Drawing.Size(400, 400);
+            this.boardSecondPlayer.TabIndex = 2;
+            // 
             // btnQuit
             // 
             this.btnQuit.Location = new System.Drawing.Point(794, 28);
@@ -72,19 +86,12 @@
             this.boardMain.Size = new System.Drawing.Size(333, 400);
             this.boardMain.TabIndex = 0;
             // 
-            // board1
-            // 
-            this.board1.Location = new System.Drawing.Point(388, 28);
-            this.board1.Name = "board1";
-            this.board1.Size = new System.Drawing.Size(400, 400);
-            this.board1.TabIndex = 2;
-            // 
             // frmMultiplayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 450);
-            this.Controls.Add(this.board1);
+            this.Controls.Add(this.boardSecondPlayer);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.boardMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -92,6 +99,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tetris";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMultiplayer_FormClosing);
             this.Load += new System.EventHandler(this.frmGamePlay_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmGamePlay_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmGamePlay_KeyUp);
@@ -106,7 +114,8 @@
         private System.Windows.Forms.Timer timTicker;
         private System.Windows.Forms.Timer timKeyHold;
         private Controls.UnFocusableButton btnQuit;
-        private TetrisBoard.Board board1;
+        private TetrisBoard.Board boardSecondPlayer;
+        private System.Windows.Forms.Timer timSender;
     }
 }
 

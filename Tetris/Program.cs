@@ -15,7 +15,9 @@ namespace Tetris
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmGamePlay());
+            //Application.Run(new frmGamePlay());
+            //"192.168.1.84"
+            Application.Run(new frmMultiplayer(120,"192.168.1.71"));
         }
     }
 }
