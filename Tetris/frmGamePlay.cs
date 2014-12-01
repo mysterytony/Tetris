@@ -29,7 +29,7 @@ namespace Tetris
 
 
 
-        public frmGamePlay(int timelimit = 0)
+        public frmGamePlay(int timelimit = 0, Color[,] presetMap = null)
         {
             InitializeComponent();
 
@@ -44,6 +44,23 @@ namespace Tetris
                 this.Text = "Tetris - Endless Mode";
             }
 
+            if (presetMap!=null)
+            {
+                for (int x=0;x<10;++x)
+                {
+                    for (int y=0;y<20;++y)
+                    {
+                        if (presetMap[x,y] != Color.Empty)
+                        {
+                            boardMain.map.map[x, y].setColor(presetMap[x, y]);
+                            boardMain.map.map[x, y].setStatus(TetrisBoard.Block.Block_Status.STOPPED);
+                        }
+                        
+                        
+                    }
+                }
+            }
+            
             
         }
 
